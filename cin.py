@@ -14,19 +14,19 @@ PARSE_KEYNAME_STATE = 1
 PARSE_CHARDEF_STATE = 2
 
 HEADS = [
-        CIN_HEAD,
-        ENAME_HEAD,
-        CNAME_HEAD,
-        ENCODING_HEAD,
-        SELKEY_HEAD,
-        KEYNAME_HEAD,
-        CHARDEF_HEAD,
-        ]
+    CIN_HEAD,
+    ENAME_HEAD,
+    CNAME_HEAD,
+    ENCODING_HEAD,
+    SELKEY_HEAD,
+    KEYNAME_HEAD,
+    CHARDEF_HEAD,
+]
 
 
 class Cin(object):
 
-    #TODO check the possiblility if the encoding is not utf-8
+    # TODO check the possiblility if the encoding is not utf-8
     encoding = 'utf-8'
 
     def __init__(self, fs):
@@ -39,7 +39,8 @@ class Cin(object):
         for line in fs:
 
             line = line.strip().decode(self.encoding)
-            if not line: continue
+            if not line:
+                continue
 
             if CIN_HEAD in line:
                 continue
@@ -74,7 +75,7 @@ class Cin(object):
 
                 key, root = line.split()
                 key = key.strip()
-                root = root.strip() 
+                root = root.strip()
 
                 self.keynames[key] = root
                 continue
@@ -82,10 +83,10 @@ class Cin(object):
             if state is PARSE_CHARDEF_STATE:
                 key, root = line.split()
                 key = key.strip()
-                root = root.strip() 
+                root = root.strip()
 
                 try:
-                    self.chardefs[key].append( root )
+                    self.chardefs[key].append(root)
                 except KeyError:
                     self.chardefs[key] = [root]
 
@@ -109,7 +110,7 @@ class Cin(object):
 
 
 def head_rest(head, line):
-    return line[len(head):].strip() 
+    return line[len(head):].strip()
 
 
-__all__ = [ "Cin" ]
+__all__ = ["Cin"]
