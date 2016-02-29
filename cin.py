@@ -38,7 +38,7 @@ class Cin(object):
 
         for line in fs:
 
-            line = line.strip().decode(self.encoding)
+            line = line.strip()
             if not line:
                 continue
 
